@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { LayoutDashboard, MessageSquare, Settings, LogOut, Star, FileText, UserPlus } from "lucide-react";
+import { LayoutDashboard, MessageSquare, Settings, LogOut, Star, FileText, UserPlus, Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -23,13 +23,14 @@ export default function AdminLayout({
         pathname?.startsWith('/admin/update-password');
 
     const [loading, setLoading] = useState(true);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     useEffect(() => {
         const checkAuth = async () => {
             const { data: { session } } = await supabase.auth.getSession();
 
             if (!session) {
-                // Fix: If no session, stop loading and let redirection happen
+                // If no session, stop loading and let redirection happen
                 setLoading(false);
                 if (pathname !== '/admin/login') {
                     window.location.href = '/admin/login';
@@ -68,10 +69,27 @@ export default function AdminLayout({
     }
 
     return (
-        <div className="min-h-screen bg-slate-950 text-gray-200 flex">
+        <div className="min-h-screen bg-slate-950 text-gray-200 flex flex-col md:flex-row">
+            {/* Mobile Header */}
+            <div className="md:hidden bg-slate-900 p-4 border-b border-white/10 flex justify-between items-center sticky top-0 z-30">
+                <h1 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
+                    Admin Portal
+                </h1>
+                <button
+                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                    className="text-white p-2 hover:bg-white/10 rounded-lg transition-colors"
+                >
+                    {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                </button>
+            </div>
+
             {/* Sidebar */}
-            <aside className="w-64 border-r border-white/10 bg-slate-900 hidden md:block fixed h-full z-20 pt-24">
-                <div className="px-6 mb-6">
+            <aside className={`
+                w-64 border-r border-white/10 bg-slate-900 
+                fixed md:sticky top-0 h-screen z-40 pt-24 transition-transform duration-300
+                ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+            `}>
+                <div className="px-6 mb-6 hidden md:block">
                     <h1 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
                         Admin Portal
                     </h1>
@@ -79,6 +97,7 @@ export default function AdminLayout({
                 <nav className="px-4 space-y-2">
                     <Link
                         href="/admin"
+                        onClick={() => setIsMobileMenuOpen(false)}
                         className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${pathname === '/admin' ? 'bg-blue-600/20 text-blue-400' : 'text-gray-400 hover:text-white hover:bg-white/5'
                             }`}
                     >
@@ -87,6 +106,7 @@ export default function AdminLayout({
                     </Link>
                     <Link
                         href="/admin/enquiries"
+                        onClick={() => setIsMobileMenuOpen(false)}
                         className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${pathname?.startsWith('/admin/enquiries') ? 'bg-blue-600/20 text-blue-400' : 'text-gray-400 hover:text-white hover:bg-white/5'
                             }`}
                     >
@@ -95,6 +115,7 @@ export default function AdminLayout({
                     </Link>
                     <Link
                         href="/admin/settings"
+                        onClick={() => setIsMobileMenuOpen(false)}
                         className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${pathname?.startsWith('/admin/settings') ? 'bg-blue-600/20 text-blue-400' : 'text-gray-400 hover:text-white hover:bg-white/5'
                             }`}
                     >
@@ -103,6 +124,7 @@ export default function AdminLayout({
                     </Link>
                     <Link
                         href="/admin/reviews"
+                        onClick={() => setIsMobileMenuOpen(false)}
                         className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${pathname?.startsWith('/admin/reviews') ? 'bg-blue-600/20 text-blue-400' : 'text-gray-400 hover:text-white hover:bg-white/5'
                             }`}
                     >
@@ -111,6 +133,7 @@ export default function AdminLayout({
                     </Link>
                     <Link
                         href="/admin/blog"
+                        onClick={() => setIsMobileMenuOpen(false)}
                         className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${pathname?.startsWith('/admin/blog') ? 'bg-blue-600/20 text-blue-400' : 'text-gray-400 hover:text-white hover:bg-white/5'
                             }`}
                     >
@@ -119,6 +142,7 @@ export default function AdminLayout({
                     </Link>
                     <Link
                         href="/admin/users"
+                        onClick={() => setIsMobileMenuOpen(false)}
                         className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${pathname?.startsWith('/admin/users') ? 'bg-blue-600/20 text-blue-400' : 'text-gray-400 hover:text-white hover:bg-white/5'
                             }`}
                     >
@@ -135,10 +159,8 @@ export default function AdminLayout({
                 </nav>
             </aside>
 
-            {/* Mobile Nav Placeholder (Optional) */}
-
             {/* Main Content */}
-            <main className="flex-1 md:ml-64 min-h-screen">
+            <main className="flex-1 w-full min-h-screen">
                 {children}
             </main>
         </div>
