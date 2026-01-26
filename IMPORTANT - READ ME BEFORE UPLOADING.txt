@@ -1,0 +1,18 @@
+STOP! READ THIS BEFORE UPLOADING.
+
+1. DO NOT drag the "vromon_release" folder to GitHub.
+2. Open this folder.
+3. Select ALL files inside (app, components, package.json, etc).
+4. Drag those files to GitHub.
+
+If your GitHub repository looks like this:
+- vromon_release / app
+- vromon_release / package.json
+
+IT IS WRONG and will fail.
+
+It MUST look like this:
+- app
+- components
+- package.json
+(At the top level)
