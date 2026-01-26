@@ -106,21 +106,24 @@ export default function AdminLayout({
                         className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${pathname?.startsWith('/admin/blog') ? 'bg-blue-600/20 text-blue-400' : 'text-gray-400 hover:text-white hover:bg-white/5'
                             }`}
                     >
-                        <Link
-                            href="/admin/users"
-                            className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${pathname?.startsWith('/admin/users') ? 'bg-blue-600/20 text-blue-400' : 'text-gray-400 hover:text-white hover:bg-white/5'
-                                }`}
-                        >
-                            <UserPlus className="w-5 h-5" />
-                            Manage Users
-                        </Link>
-                        <button
-                            onClick={handleSignOut}
-                            className="w-full flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-red-400 hover:bg-white/5 rounded-lg transition-colors text-left"
-                        >
-                            <LogOut className="w-5 h-5" />
-                            Sign Out
-                        </button>
+                        <FileText className="w-5 h-5" />
+                        Blog
+                    </Link>
+                    <Link
+                        href="/admin/users"
+                        className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${pathname?.startsWith('/admin/users') ? 'bg-blue-600/20 text-blue-400' : 'text-gray-400 hover:text-white hover:bg-white/5'
+                            }`}
+                    >
+                        <UserPlus className="w-5 h-5" />
+                        Manage Users
+                    </Link>
+                    <button
+                        onClick={handleSignOut}
+                        className="w-full flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-red-400 hover:bg-white/5 rounded-lg transition-colors text-left"
+                    >
+                        <LogOut className="w-5 h-5" />
+                        Sign Out
+                    </button>
                 </nav>
             </aside>
 
