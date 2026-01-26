@@ -27,7 +27,15 @@ export default function AdminLayout({
     useEffect(() => {
         const checkAuth = async () => {
             const { data: { session } } = await supabase.auth.getSession();
-            if (!session) return;
+
+            if (!session) {
+                // Fix: If no session, stop loading and let redirection happen
+                setLoading(false);
+                if (pathname !== '/admin/login') {
+                    window.location.href = '/admin/login';
+                }
+                return;
+            }
 
             // Check if user is in whitelist
             const { data, error } = await supabase
@@ -44,7 +52,7 @@ export default function AdminLayout({
             setLoading(false);
         };
         checkAuth();
-    }, [supabase]);
+    }, [supabase, pathname]);
 
     const handleSignOut = async () => {
         await supabase.auth.signOut();
