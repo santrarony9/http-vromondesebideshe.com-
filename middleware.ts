@@ -4,6 +4,10 @@ import type { NextRequest } from 'next/server'
 
 export async function middleware(req: NextRequest) {
     const res = NextResponse.next()
+
+    // Add pathname to headers so Server Components can read it
+    res.headers.set('x-pathname', req.nextUrl.pathname)
+
     const supabase = createMiddlewareClient({ req, res })
 
     const {

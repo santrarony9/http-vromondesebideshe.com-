@@ -12,11 +12,17 @@ export const metadata: Metadata = {
     description: "Experience the world with Vromon Deshe Bideshe. Best tours, best prices.",
 };
 
+import { headers } from "next/headers";
+
 export default function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
+    const headersList = headers();
+    const pathname = headersList.get("x-pathname") || "";
+    const isAdmin = pathname.startsWith("/admin");
+
     return (
         <html lang="en" suppressHydrationWarning>
             <body className={inter.className}>
@@ -26,11 +32,11 @@ export default function RootLayout({
                     enableSystem
                     disableTransitionOnChange
                 >
-                    <Navbar />
+                    {!isAdmin && <Navbar />}
                     <main className="min-h-screen">
                         {children}
                     </main>
-                    <Footer />
+                    {!isAdmin && <Footer />}
                 </ThemeProvider>
             </body>
         </html>
