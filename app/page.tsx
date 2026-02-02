@@ -23,33 +23,41 @@ export default async function Home() {
     return (
         <div className="flex flex-col min-h-screen">
             {/* Hero Section */}
-            <section className="relative h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-yellow-300 via-orange-400 to-orange-600">
-                <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-                    <div className="space-y-0 text-black uppercase tracking-tight">
-                        <span className="text-xl md:text-2xl font-black block">Start Your</span>
-                        <h1 className="text-7xl md:text-[120px] font-black leading-none mb-2">
+            <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                    src={bgImage}
+                    alt="Travel destination"
+                    className="absolute inset-0 w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-black/60 z-10" />
+
+                <div className="relative z-20 text-center px-4 max-w-4xl mx-auto">
+                    <div className="space-y-0 text-white uppercase tracking-tight">
+                        <span className="text-xl md:text-2xl font-black block opacity-80">Start Your</span>
+                        <h1 className="text-7xl md:text-[120px] font-black leading-none mb-2 bg-gradient-to-b from-white to-white/70 bg-clip-text text-transparent">
                             JOURNEY
                         </h1>
-                        <span className="text-xl md:text-2xl font-black block mb-12">With Us</span>
+                        <span className="text-xl md:text-2xl font-black block mb-12 opacity-80">With Us</span>
                     </div>
 
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up">
                         <Link
                             href="/tours?category=Domestic"
-                            className="w-full sm:w-auto bg-black text-white text-lg font-bold px-10 py-5 rounded-full hover:scale-105 transition-transform shadow-2xl"
+                            className="w-full sm:w-auto bg-blue-600 text-white text-lg font-bold px-10 py-5 rounded-full hover:bg-blue-700 transition-all shadow-2xl hover:scale-105 active:scale-95"
                         >
                             Domestic Tours
                         </Link>
                         <Link
                             href="/tours?category=International"
-                            className="w-full sm:w-auto bg-black text-white text-lg font-bold px-10 py-5 rounded-full hover:scale-105 transition-transform shadow-2xl"
+                            className="w-full sm:w-auto bg-white/10 backdrop-blur-md border border-white/20 text-white text-lg font-bold px-10 py-5 rounded-full hover:bg-white/20 transition-all shadow-2xl hover:scale-105 active:scale-95"
                         >
                             International Tours
                         </Link>
                     </div>
                 </div>
 
-                {/* Decorative Elements */}
+                {/* Decorative bottom gradient */}
                 <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-slate-950 to-transparent z-20" />
             </section>
 

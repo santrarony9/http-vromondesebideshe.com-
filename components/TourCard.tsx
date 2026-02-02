@@ -98,7 +98,7 @@ export default function TourCard({ tour }: { tour: Tour }) {
                         href={whatsappUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="w-full bg-[#FFC133] hover:bg-[#FFB700] text-gray-900 font-bold py-3 rounded-lg transition-colors flex items-center justify-center gap-2 text-sm shadow-sm"
+                        className="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-3 rounded-lg transition-all flex items-center justify-center gap-2 text-sm shadow-lg hover:shadow-xl active:scale-[0.98]"
                     >
                         {/* Simple WhatsApp-like SVG */}
                         <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg">

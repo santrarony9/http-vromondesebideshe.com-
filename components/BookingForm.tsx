@@ -93,7 +93,7 @@ export default function BookingForm({ tourId, tourPrice, paymentQrUrl }: { tourI
 
                 {paymentQrUrl && (
                     <div className="mb-6 border border-white/10 rounded-lg p-4 bg-slate-800/50 text-center">
-                        <p className="text-sm font-medium text-yellow-400 mb-2">Scan to Pay</p>
+                        <p className="text-sm font-medium text-blue-400 mb-2">Scan to Pay</p>
                         <div className="bg-white p-2 rounded-lg inline-block mb-2">
                             {/* eslint-disable-next-line @next/next/no-img-element */}
                             <img src={paymentQrUrl} alt="Payment QR" className="w-32 h-32 object-contain" />

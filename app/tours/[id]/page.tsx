@@ -40,7 +40,7 @@ export default async function TourDetailsPage({ params }: { params: { id: string
                             {tour.category}
                         </span>
                         {tour.rating && (
-                            <span className="bg-yellow-500/20 text-yellow-500 border border-yellow-500/20 px-4 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+                            <span className="bg-blue-500/20 text-blue-400 border border-blue-500/20 px-4 py-1 rounded-full text-xs font-bold flex items-center gap-1">
                                 ★ {tour.rating}
                             </span>
                         )}
