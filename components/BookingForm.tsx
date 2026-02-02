@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { formatCurrency } from "@/lib/utils";
 

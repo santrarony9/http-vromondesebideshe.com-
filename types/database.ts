@@ -12,7 +12,21 @@ export type Tour = {
     description: string;
     original_price?: number;
     rating?: number;
-    itinerary: any; // JSONB
+    itinerary?: any[]; // Array of { day, title, description, image }
+    add_ons?: any[];   // Array of { name, price }
+    hotels?: any[];    // Array of { name, image_url, description }
+    created_at: string;
+}
+
+export type Review = {
+    id: string;
+    name: string;
+    rating: number;
+    comment: string;
+    source: string;
+    avatar_url?: string;
+    images?: string[]; // Array of image URLs
+    is_approved: boolean;
     created_at: string;
 }
 

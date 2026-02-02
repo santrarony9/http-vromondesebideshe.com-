@@ -1,7 +1,7 @@
 "use client";
 // Verified Fix Update
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Save, Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";

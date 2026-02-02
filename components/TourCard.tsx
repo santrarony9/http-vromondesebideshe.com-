@@ -27,8 +27,16 @@ export default function TourCard({ tour }: { tour: Tour }) {
                         No Image
                     </div>
                 )}
-                <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-white uppercase tracking-wider">
-                    {tour.category}
+                <div className="absolute top-4 right-4 flex flex-col items-end gap-2">
+                    <div className="bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-white uppercase tracking-wider">
+                        {tour.category}
+                    </div>
+                    {tour.hotels && tour.hotels.length > 0 && (
+                        <div className="bg-blue-600/80 backdrop-blur-md px-3 py-1 rounded-full text-[9px] font-black text-white uppercase tracking-wider flex items-center gap-1 shadow-lg">
+                            <Star className="w-2.5 h-2.5 fill-current" />
+                            Premium Stay
+                        </div>
+                    )}
                 </div>
             </div>
 

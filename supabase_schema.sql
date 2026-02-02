@@ -97,4 +97,24 @@ alter table bookings add column if not exists amount numeric;
 -- Migration: Add extra fields for UI enhancements
 alter table tours add column if not exists original_price numeric;
 alter table tours add column if not exists rating numeric default 5;
+alter table tours add column if not exists add_ons jsonb default '[]'::jsonb;
+alter table tours add column if not exists hotels jsonb default '[]'::jsonb;
+
+-- Reviews Table
+create table if not exists reviews (
+  id uuid default uuid_generate_v4() primary key,
+  name text not null,
+  rating integer not null default 5,
+  comment text not null,
+  source text default 'google',
+  avatar_url text,
+  images jsonb default '[]'::jsonb,
+  is_approved boolean default true,
+  created_at timestamp with time zone default timezone('utc'::text, now()) not null
+);
+
+-- Enable RLS for Reviews
+alter table reviews enable row level security;
+create policy "Anyone can read reviews" on reviews for select using (true);
+create policy "Admins can manage reviews" on reviews for all using (auth.role() = 'authenticated');
 
