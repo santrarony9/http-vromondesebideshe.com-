@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Loader2, Trash2, CheckCircle, XCircle, Plus, X } from "lucide-react";
 import Image from "next/image";
+import ImageUpload from "@/components/ui/ImageUpload";
 
 export default function AdminReviews() {
     const [reviews, setReviews] = useState<any[]>([]);
@@ -122,13 +123,11 @@ export default function AdminReviews() {
                                 </select>
                             </div>
                             <div>
-                                <label className="block text-sm text-gray-400 mb-1">Avatar URL (Optional)</label>
-                                <input
-                                    type="text"
-                                    className="w-full bg-slate-800 border-white/10 rounded-lg px-4 py-2"
-                                    placeholder="https://lh3.googleusercontent.com/..."
+                                <label className="block text-sm text-gray-400 mb-1">Avatar (Optional)</label>
+                                <ImageUpload
                                     value={newReview.avatar_url}
-                                    onChange={e => setNewReview({ ...newReview, avatar_url: e.target.value })}
+                                    onChange={(url) => setNewReview({ ...newReview, avatar_url: url })}
+                                    className="h-32"
                                 />
                             </div>
                         </div>

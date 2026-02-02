@@ -10,6 +10,8 @@ export type Tour = {
     duration: string;
     image_url: string;
     description: string;
+    original_price?: number;
+    rating?: number;
     itinerary: any; // JSONB
     created_at: string;
 }

@@ -5,6 +5,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { Save, Loader2, ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import ImageUpload from "@/components/ui/ImageUpload";
 
 interface PostFormProps {
     initialData?: any;
@@ -96,13 +97,10 @@ export default function PostForm({ initialData, isEdit = false }: PostFormProps)
                     </div>
 
                     <div>
-                        <label className="block text-sm font-medium mb-1 text-gray-400">Cover Image URL</label>
-                        <input
-                            name="image_url"
+                        <label className="block text-sm font-medium mb-1 text-gray-400">Cover Image</label>
+                        <ImageUpload
                             value={formData.image_url}
-                            onChange={handleChange}
-                            placeholder="https://..."
-                            className="w-full bg-slate-800 border border-white/10 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white"
+                            onChange={(url) => setFormData(prev => ({ ...prev, image_url: url }))}
                         />
                     </div>
 

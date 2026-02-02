@@ -23,34 +23,34 @@ export default async function Home() {
     return (
         <div className="flex flex-col min-h-screen">
             {/* Hero Section */}
-            <section className="relative h-[90vh] flex items-center justify-center overflow-hidden">
-                <div className="absolute inset-0 z-0">
-                    <div
-                        className="absolute inset-0 bg-cover bg-center transition-opacity duration-700"
-                        style={{ backgroundImage: `url('${bgImage}')` }}
-                    />
-                    <div className="absolute inset-0 bg-black/60" />
-                </div>
+            <section className="relative h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-yellow-300 via-orange-400 to-orange-600">
+                <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+                    <div className="space-y-0 text-black uppercase tracking-tight">
+                        <span className="text-xl md:text-2xl font-black block">Start Your</span>
+                        <h1 className="text-7xl md:text-[120px] font-black leading-none mb-2">
+                            JOURNEY
+                        </h1>
+                        <span className="text-xl md:text-2xl font-black block mb-12">With Us</span>
+                    </div>
 
-                <div className="relative z-10 text-center px-4 max-w-4xl mx-auto animate-fade-in-up">
-                    <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight text-white">
-                        {settings?.hero_headline || "Explore the Unseen World"}
-                    </h1>
-                    <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
-                        {settings?.hero_subheadline || "Premium tours, curated itineraries, and unforgettable experiences. Your journey begins here."}
-                    </p>
-
-                    <div className="bg-white/10 backdrop-blur-md p-2 rounded-full max-w-lg mx-auto border border-white/20 flex flex-col sm:flex-row items-center gap-2 sm:gap-0">
-                        <input
-                            type="text"
-                            placeholder="Where do you want to go?"
-                            className="w-full flex-1 bg-transparent border-none px-6 py-3 text-white placeholder-gray-300 focus:outline-none text-center sm:text-left"
-                        />
-                        <Link href="/tours" className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white rounded-full px-8 py-3 font-medium transition-colors">
-                            Explore
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up">
+                        <Link
+                            href="/tours?category=Domestic"
+                            className="w-full sm:w-auto bg-black text-white text-lg font-bold px-10 py-5 rounded-full hover:scale-105 transition-transform shadow-2xl"
+                        >
+                            Domestic Tours
+                        </Link>
+                        <Link
+                            href="/tours?category=International"
+                            className="w-full sm:w-auto bg-black text-white text-lg font-bold px-10 py-5 rounded-full hover:scale-105 transition-transform shadow-2xl"
+                        >
+                            International Tours
                         </Link>
                     </div>
                 </div>
+
+                {/* Decorative Elements */}
+                <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-slate-950 to-transparent z-20" />
             </section>
 
             {/* Featured Tours Section */}

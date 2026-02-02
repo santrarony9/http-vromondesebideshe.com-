@@ -4,6 +4,7 @@ import { useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { Loader2, Save } from "lucide-react";
+import ImageUpload from "@/components/ui/ImageUpload";
 
 interface TourFormProps {
     initialData?: any;
@@ -24,6 +25,8 @@ export default function TourForm({ initialData, isEdit = false }: TourFormProps)
         category: initialData?.category || "International",
         image_url: initialData?.image_url || "",
         description: initialData?.description || "",
+        original_price: initialData?.original_price || "",
+        rating: initialData?.rating || "5",
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -54,6 +57,8 @@ export default function TourForm({ initialData, isEdit = false }: TourFormProps)
                 category: formData.category,
                 description: formData.description,
                 image_url: formData.image_url,
+                original_price: formData.original_price ? Number(formData.original_price) : null,
+                rating: Number(formData.rating),
                 itinerary
             };
 
@@ -95,7 +100,7 @@ export default function TourForm({ initialData, isEdit = false }: TourFormProps)
                 </div>
 
                 <div>
-                    <label className="block text-sm font-medium mb-1 text-gray-400">Price ($)</label>
+                    <label className="block text-sm font-medium mb-1 text-gray-400">Current Price ($)</label>
                     <input
                         required
                         name="price"
@@ -104,6 +109,18 @@ export default function TourForm({ initialData, isEdit = false }: TourFormProps)
                         type="number"
                         className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
                         placeholder="999"
+                    />
+                </div>
+
+                <div>
+                    <label className="block text-sm font-medium mb-1 text-gray-400">Original Price ($) - Optional</label>
+                    <input
+                        name="original_price"
+                        value={formData.original_price}
+                        onChange={handleChange}
+                        type="number"
+                        className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+                        placeholder="1299"
                     />
                 </div>
             </div>
@@ -136,43 +153,54 @@ export default function TourForm({ initialData, isEdit = false }: TourFormProps)
                 </div>
             </div>
 
-            <div>
-                <label className="block text-sm font-medium mb-1 text-gray-400">Image URL</label>
-                <input
-                    required
-                    name="image_url"
-                    value={formData.image_url}
-                    onChange={handleChange}
-                    type="url"
-                    className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
-                    placeholder="https://..."
-                />
-                <p className="text-xs text-gray-500 mt-1">Use a hosted image link (e.g. Unsplash or Supabase Storage public URL)</p>
-            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label className="block text-sm font-medium mb-1 text-gray-400">Star Rating (1-5)</label>
+                    <input
+                        required
+                        name="rating"
+                        value={formData.rating}
+                        onChange={handleChange}
+                        type="number"
+                        min="1"
+                        max="5"
+                        step="0.1"
+                        className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+                        placeholder="5"
+                    />
+                </div>
 
-            <div>
-                <label className="block text-sm font-medium mb-1 text-gray-400">Description</label>
-                <textarea
-                    required
-                    name="description"
-                    value={formData.description}
-                    onChange={handleChange}
-                    rows={4}
-                    className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
-                    placeholder="Detailed overview of the tour..."
-                />
-            </div>
+                <div>
+                    <label className="block text-sm font-medium mb-1 text-gray-400">Cover Image</label>
+                    <ImageUpload
+                        value={formData.image_url}
+                        onChange={(url) => setFormData(prev => ({ ...prev, image_url: url }))}
+                    />
+                </div>
 
-            {error && <p className="text-red-400 text-sm">{error}</p>}
+                <div>
+                    <label className="block text-sm font-medium mb-1 text-gray-400">Description</label>
+                    <textarea
+                        required
+                        name="description"
+                        value={formData.description}
+                        onChange={handleChange}
+                        rows={4}
+                        className="w-full bg-black/40 border border-white/10 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 outline-none"
+                        placeholder="Detailed overview of the tour..."
+                    />
+                </div>
 
-            <button
-                disabled={loading}
-                type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-colors flex justify-center items-center gap-2"
-            >
-                {loading ? <Loader2 className="animate-spin w-5 h-5" /> : <Save className="w-5 h-5" />}
-                {isEdit ? "Update Package" : "Create Package"}
-            </button>
+                {error && <p className="text-red-400 text-sm">{error}</p>}
+
+                <button
+                    disabled={loading}
+                    type="submit"
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-colors flex justify-center items-center gap-2"
+                >
+                    {loading ? <Loader2 className="animate-spin w-5 h-5" /> : <Save className="w-5 h-5" />}
+                    {isEdit ? "Update Package" : "Create Package"}
+                </button>
         </form>
     );
 }

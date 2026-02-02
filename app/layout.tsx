@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/providers/theme-provider";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -37,6 +38,7 @@ export default function RootLayout({
                         {children}
                     </main>
                     {!isAdmin && <Footer />}
+                    {!isAdmin && <WhatsAppButton />}
                 </ThemeProvider>
             </body>
         </html>

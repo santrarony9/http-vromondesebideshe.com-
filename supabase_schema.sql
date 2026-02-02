@@ -94,3 +94,7 @@ alter table bookings add column if not exists razorpay_order_id text;
 alter table bookings add column if not exists payment_status text default 'pending';
 alter table bookings add column if not exists amount numeric;
 
+-- Migration: Add extra fields for UI enhancements
+alter table tours add column if not exists original_price numeric;
+alter table tours add column if not exists rating numeric default 5;
+
